@@ -27,6 +27,7 @@ class BelongsToOptions < AssocOptions
     }
 
     defaults.keys.each do |key|
+      # calls attr_accessor
       self.send("#{key}=", options[key] || defaults[key])
     end
   end
@@ -53,7 +54,7 @@ module Associatable
 
     define_method(name) do
       options = self.class.assoc_options[name]
-
+      debugger
       key_val = self.send(options.foreign_key)
       options
         .model_class

@@ -47,6 +47,7 @@ class SQLObject
     self.parse_all(rows)
   end
 
+  # converts hash to Model object
   def self.parse_all(results)
     results.map do |hash|
       self.new(hash)
@@ -72,6 +73,7 @@ class SQLObject
       unless self.class.send(:columns).include?(attr_name)
         raise "unknown attribute '#{attr_name}'"
       end
+      # calls attr_accessor methods defined by finalize!
       self.send("#{attr_name}=", value)
     end
 
