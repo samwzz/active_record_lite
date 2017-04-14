@@ -20,13 +20,22 @@ end
 
 class BelongsToOptions < AssocOptions
   def initialize(name, options = {})
-    # ...
+    defaults = {
+      :primary_key => :id,
+      :foreign_key => "#{name}_id".to_sym,
+      :class_name => name.to_s.camelcase
+    }
+    defaults
   end
 end
 
 class HasManyOptions < AssocOptions
   def initialize(name, self_class_name, options = {})
-    # ...
+    defaults = {
+      :primary_key => :id,
+      :foreign_key => "#{self_class_name}".to_sym,
+      :class_name => name.to_s.camelcase
+    }
   end
 end
 
@@ -47,4 +56,5 @@ end
 
 class SQLObject
   # Mixin Associatable here...
+  extend Associatable
 end
